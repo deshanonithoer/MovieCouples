@@ -25,26 +25,3 @@
 .custom-file {
     margin-top: 10px;
 }
-
-@media only screen and (max-width: 768px){
-    #profile {
-        position: absolute;
-        right: 20px;
-    }
-
-    .welkom-message {
-        display: none;
-    }
-
-    #profile-image {
-        margin-top: 20px;
-    }
-
-    #profile-info {
-        margin-top: 15px;
-    }
-
-    #profile-info button {
-        margin-bottom: 20px;
-    }
-}
