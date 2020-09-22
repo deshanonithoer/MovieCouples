@@ -27,4 +27,12 @@
     #profile-info button {
         margin-bottom: 20px;
     }
+
+    #friends-content > .row .row {
+        margin-top: 0 !important;
+    }
+
+    #friends-content > .row .row > div {
+        margin-bottom: 10px;
+    }
 }
