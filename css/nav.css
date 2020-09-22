@@ -1,0 +1,14 @@
+nav {
+    height: 60px;
+    padding-top: 11px;
+    background-color: #eaeaea;
+    border-radius: 0 0 5px 5px;
+}
+
+.welkom-message {
+    padding-right: 5px;
+}
+
+nav a {
+    display: inline-block;
+}

@@ -1,0 +1,71 @@
+.friends-nav-button {
+    display: block;
+    width: 85%;
+    margin: 10px auto;
+}
+
+.friends-nav-button:first-child {
+    margin-top: 0;
+}
+
+.friends-container {
+    margin-top: 20px;
+}
+
+#friends-content > .row img {
+    width: 70px;
+    height: 40px;
+    float: left;
+    object-fit: cover;
+}
+
+#friends-content > .row span {
+    text-align: center;
+    font-size: 15px;
+    width: calc(100% - 70px);
+    padding-left: 15px;
+    height: 40px;
+    display: inline-block;
+    line-height: 39px;
+}
+
+#friends-content .item-wrapper {
+    width: calc(100% - 15px);
+    margin: auto; 
+    border: 1px solid #ced4da;
+    padding: 20px;
+    border-radius: .25rem;
+    transition: 0.3s ease;
+}
+
+.item-wrapper:hover {
+    cursor: pointer;
+    background-color: #c7c7c7;
+}
+
+#friends-content > .row .row {
+    margin-top: 15px;
+}
+
+.add-friend-button {
+    float: right;
+    width: 40px;
+}
+
+.friend-image {
+    width: 100%;
+}
+
+.request-wrapper {
+    margin-bottom: 15px !important;
+}
+
+.request-span {
+    text-align: left !important;
+    width: auto !important;
+    float: left !important;
+}
+
+.time-elapsed-span {
+    font-size: 13px !important;
+}

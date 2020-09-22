@@ -1,0 +1,15 @@
+# Enable URL Rewriting
+RewriteEngine On
+RewriteBase /
+
+# Rewrite for login
+RedirectMatch 301 ^/login.*$ /php/loginRegister.php
+
+# Rewrite for loguit
+RedirectMatch 301 ^/loguit.*$ /php/loguit.php
+
+# Rewrite for profile
+RedirectMatch 301 ^/profile.*$ /php/profile.php
+
+# Rewrite for users
+RedirectMatch 301 ^/users.*$ /php/users.php
