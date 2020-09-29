@@ -79,6 +79,7 @@ class Database {
                 `friend-requests`
             JOIN `users` ON `users`.id = `friend-requests`.`from_uid` AND `friend-requests`.`to_uid` = ?
             WHERE `friend-requests`.`status` = 'pending'
+            GROUP BY `users`.id
         ";
 
         return $this->dataCall($sql, array($uid), true);
