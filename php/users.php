@@ -12,7 +12,6 @@ $db = new Database();
 include("../layout/nav.php");
 
 ?>
-<!DOCTYPE html>
 <link href="../css/users.css" rel="stylesheet" />
 
 <div class="container friends-container">

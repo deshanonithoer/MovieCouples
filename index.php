@@ -7,7 +7,6 @@ $db = new Database();
 
 include("layout/nav.php");
 ?>
-<!DOCTYPE html>
 <link href="/css/home.css" rel="stylesheet" />
 
 <div class="container">

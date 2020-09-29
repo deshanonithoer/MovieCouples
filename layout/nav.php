@@ -7,6 +7,7 @@ if(array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
 } 
 
 ?>
+<!DOCTYPE html>
 <link rel="stylesheet" href="../css/nav.css">
 
 <nav class="container">
