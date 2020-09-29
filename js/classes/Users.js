@@ -66,6 +66,11 @@ class Users extends Form {
             ;
 
             $('#user-modal').html(element);
+            if(userData.hasOwnProperty('noFriend')){
+                $('#send-friend-request').hide();
+            } else {
+                $('#send-friend-request').show();
+            }
             $('#send-friend-request').attr('from_uid', parseInt(global_scope.uid));
             $('#send-friend-request').attr('to_uid', parseInt(userData.id));
             $('#myModal').on('shown.bs.modal', function () {
