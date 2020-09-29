@@ -7,13 +7,13 @@ class Database {
     // Construct om de database connectie te maken 
     public function __construct(){
         try {
-            // $dbname = 'u45310p68148_moviematch';
-            // $username = 'u45310p68148_root';
-            // $password = 'kousjilia';
+            $dbname = 'u45310p68148_moviematch';
+            $username = 'u45310p68148_root';
+            $password = 'kousjilia';
             
-            $dbname = 'fasten_your_seatbelts';
-            $username = 'root';
-            $password = '';
+            // $dbname = 'fasten_your_seatbelts';
+            // $username = 'root';
+            // $password = '';
 
             $this->db = new PDO("mysql:host=localhost;dbname=$dbname;charset=utf8;", $username, $password);
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
