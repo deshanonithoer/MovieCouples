@@ -84,6 +84,24 @@ class Database {
         return $this->dataCall($sql, array($uid), true);
     }
 
+    public function fetchFriends($uid){
+        $sql = "SELECT
+                `users`.id,
+                `users`.username,
+                `users`.email,
+                `users`.image_path,
+                `friends`.`created_at`,
+                `friends`.id as request_id
+            FROM
+                `friends`
+            JOIN `users` ON `users`.id = `friends`.`friend_id`
+            WHERE `friends`.`user_id` = ?   
+            GROUP BY `users`.id
+        ";
+
+        return $this->dataCall($sql, array($uid), true);
+    }
+
     public function insertNewFriend($user_id, $friend_id){
         $sql = "INSERT INTO `friends` (`created_at`, `user_id`, `friend_id`) VALUES (NOW(), ?, ?)";
         return $this->dataCall($sql, array($user_id, $friend_id), false);
