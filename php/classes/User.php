@@ -25,6 +25,8 @@ class User extends Database {
         if(count($this->friendRequests)){
             $this->totalRequests = count($this->friendRequests);
         }
+
+        $this->friends = $this->fetchFriends($this->uid);
     }
 
     public function validateUsername ($username){

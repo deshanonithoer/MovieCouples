@@ -16,7 +16,10 @@ class Users extends User {
     }
 
     public function fetchUsers() {
-        if(array_key_exists('search', $_POST) && $_POST['search'] == true){
+        if(array_key_exists('friends', $_POST) && $_POST['friends'] == "true"){
+            $this->setUser($_SESSION['uid']);
+            $allUsers = $this->friends;
+        } else if(array_key_exists('search', $_POST) && $_POST['search'] == true){
             $allUsers = $this->fetchAllUsers($_POST['search']);
         } else {
             $allUsers = $this->fetchAllUsers();

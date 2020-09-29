@@ -95,7 +95,6 @@ class Users extends Form {
             data.append('request_id', parseInt($($(parent).find('input[name="request_id"]')[0]).val()));
             
             global_scope.ajaxCall('../../php/data/users.php', data, async function(response){
-                console.log(response);
                 if(response && $.isNumeric(response) && parseInt(response) > 0){
                     $($('.friend-requests-counter')[0]).text(response);
                     global_scope.fetchRequests();
@@ -128,7 +127,6 @@ class Users extends Form {
         let data = new FormData();
         data.append('action', 'fetchRequests');
         this.ajaxCall('../../php/data/users.php', data, async function(response){
-            console.log(response);
             if(response){
                 response = JSON.parse(response);
                 if(response[0] == 'succes'){
@@ -136,6 +134,20 @@ class Users extends Form {
                 }
             } else {
                 $('#users-wrapper').html('');
+            }
+        });
+    }
+
+    fetchFriends(){
+        let data = new FormData();
+        data.append('action', 'fetchUsers');
+        data.append('friends', true);
+        this.ajaxCall('../../php/data/users.php', data, async function(response){
+            if(response){
+                response = JSON.parse(response);
+                $('#friends-content > .row').html(response);
+            } else {
+                $('#friends-content .row').text('0 Resultaten gevonden');
             }
         });
     }
