@@ -35,7 +35,7 @@ class Users extends User {
                 $layout .= '
                     <div class="col-md-4">
                         <div class="item-wrapper user-wrapper" data-toggle="modal" data-target="#user-modal-container">';
-                        if($friendsRequest != true){
+                        if($this->friends){
                             $noRequest = false;
                             foreach($this->friends as $friendInfo){
                                 if($value['id'] == $friendInfo['id']){
