@@ -16,9 +16,12 @@ class Users extends User {
     }
 
     public function fetchUsers() {
+        $this->setUser($_SESSION['uid']);
+        $friendsRequest = false;
+
         if(array_key_exists('friends', $_POST) && $_POST['friends'] == "true"){
-            $this->setUser($_SESSION['uid']);
             $allUsers = $this->friends;
+            $friendsRequest = true;
         } else if(array_key_exists('search', $_POST) && $_POST['search'] == true){
             $allUsers = $this->fetchAllUsers($_POST['search']);
         } else {
@@ -32,6 +35,18 @@ class Users extends User {
                 $layout .= '
                     <div class="col-md-4">
                         <div class="item-wrapper user-wrapper" data-toggle="modal" data-target="#user-modal-container">';
+                        if($friendsRequest != true){
+                            $noRequest = false;
+                            foreach($this->friends as $friendInfo){
+                                if($value['id'] == $friendInfo['id']){
+                                    $noRequest = true;
+                                }
+                            }
+
+                            if($noRequest == true){
+                                $layout .= '<input type="hidden" name="noFriend" value="true" />';
+                            }
+                        }
 
                         foreach($value as $column => $columnValue){
                             $layout .= '<input type="hidden" name="'. $column .'" value="'. $columnValue .'" />';
