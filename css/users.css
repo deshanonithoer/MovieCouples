@@ -27,6 +27,9 @@
     height: 40px;
     display: inline-block;
     line-height: 39px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #friends-content .item-wrapper {
