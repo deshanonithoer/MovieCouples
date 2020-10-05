@@ -96,11 +96,26 @@ class Database {
             FROM
                 `friends`
             JOIN `users` ON `users`.id = `friends`.`friend_id`
-            WHERE `friends`.`user_id` = ?   
+            WHERE `friends`.`user_id` = ?
+            GROUP BY `users`.id
+
+            union
+
+            SELECT
+                `users`.id,
+                `users`.username,
+                `users`.email,
+                `users`.image_path,
+                `friends`.`created_at`,
+                `friends`.id as request_id
+            FROM
+                `friends`
+            JOIN `users` ON `users`.id = `friends`.`user_id`
+            WHERE `friends`.`friend_id` = ?
             GROUP BY `users`.id
         ";
 
-        return $this->dataCall($sql, array($uid), true);
+        return $this->dataCall($sql, array($uid, $uid), true);
     }
 
     public function insertNewFriend($user_id, $friend_id){
