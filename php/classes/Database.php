@@ -63,7 +63,7 @@ class Database {
     }
 
     public function insertFriendRequest($from_uid, $to_uid){
-        $sql = "INSERT INTO `friend-requests` (`created_at`, `from_uid`, `to_uid`) VALUES (NOW(), ?, ?)";
+        $sql = "INSERT IGNORE INTO `friend-requests` (`created_at`, `from_uid`, `to_uid`) VALUES (NOW(), ?, ?)";
         return $this->dataCall($sql, array($from_uid, $to_uid), false);
     }
 
