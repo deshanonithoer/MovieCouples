@@ -22,7 +22,7 @@ if(array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
             <?php if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']) { ?>
                 <a href="/users">
                     <button type="button" class="btn btn-info">
-                        Users 
+                        Social 
                     </button>
                 </a>
             <?php } ?>
