@@ -12,3 +12,7 @@ nav {
 nav a {
     display: inline-block;
 }
+
+nav button {
+    height: 40px;
+}
