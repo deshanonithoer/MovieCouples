@@ -44,6 +44,13 @@ class Matching extends User {
             echo json_encode($layout);
         }
     }
+
+    public function validateMovie(){
+        $validate = $this->validateMovieDB($_POST['movie_id'], $_SESSION['uid']);
+        if(count($validate) !== 0){
+            echo 'error';
+        }
+    }
 }
 
 if($_POST){

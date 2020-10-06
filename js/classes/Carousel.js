@@ -150,36 +150,46 @@ class Carousel extends Form {
     }
 
     push() {
-        let globalScope = this;
         if(this.movies && this.movies.length){
-
-            // Main element
-            let card = document.createElement('div');
-            card.classList.add('card');
-            card.style.backgroundImage = "url('http://image.tmdb.org/t/p/original/"+ this.movies[0].poster_path +"')";
-
-            // Info button
-            let infoButton = document.createElement('button');
-            infoButton.classList.add('movie-info-button');
-            infoButton.classList.add('btn-success');
-            infoButton.innerHTML = 'Info';
-            card.append(infoButton);
-            this.board.insertBefore(card, this.board.firstChild);
-
-            // JSON data
-            let infoInput = document.createElement('input');
-            infoInput.setAttribute("json_data", JSON.stringify(this.movies[0]));
-            infoInput.setAttribute("type", "hidden");
-            card.append(infoInput);
-
-            // On card click event
-            $(card).on('click', '.movie-info-button', function(){
-                globalScope.showMovieInfo(JSON.parse($(card).find('input').attr('json_data')));
-            });
+            let movieData = this.movies[0];
             
-            // handle gestures
-            globalScope.movies.shift();
-            this.handle();
+            this.form_data.append('action', 'validateMovie');
+            this.form_data.append('movie_id', this.movies[0].id);
+            let globalScope = this;
+
+            this.ajaxCall('../../php/data/movies.php', this.form_data, async function(response){
+                if(response == 'error'){
+                    globalScope.get();
+                } else {
+                    // Main element
+                    let card = document.createElement('div');
+                    card.classList.add('card');
+                    card.style.backgroundImage = "url('http://image.tmdb.org/t/p/original/"+ movieData.poster_path +"')";
+        
+                    // Info button
+                    let infoButton = document.createElement('button');
+                    infoButton.classList.add('movie-info-button');
+                    infoButton.classList.add('btn-success');
+                    infoButton.innerHTML = '<i class="fas fa-question-circle"></i>';
+                    card.append(infoButton);
+                    globalScope.board.insertBefore(card, globalScope.board.firstChild);
+        
+                    // JSON data
+                    let infoInput = document.createElement('input');
+                    infoInput.setAttribute("json_data", JSON.stringify(movieData));
+                    infoInput.setAttribute("type", "hidden");
+                    card.append(infoInput);
+        
+                    // On card click event
+                    $(card).on('click', '.movie-info-button', function(){
+                        globalScope.showMovieInfo(JSON.parse($(card).find('input').attr('json_data')));
+                    });
+                    
+                    // handle gestures
+                    globalScope.movies.shift();
+                    globalScope.handle();
+                }
+            });
         } else {
             this.get();
         }
@@ -187,7 +197,7 @@ class Carousel extends Form {
 
     get () {
         let globalScope = this;
-        let pageNumber = Math.floor(Math.random() * 100) + 1  ;
+        let pageNumber = Math.floor(Math.random() * 100) + 1;
         this.apiKey = "06454454e69fbc41ba407d51cd27c80c";
         this.apiUrl = "https://api.themoviedb.org/4/list/"+ pageNumber +"?page=1&api_key=" + this.apiKey;
         
