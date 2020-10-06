@@ -153,6 +153,7 @@ class Carousel extends Form {
         if(this.movies && this.movies.length){
             let movieData = this.movies[0];
             
+            this.form_data = new FormData();
             this.form_data.append('action', 'validateMovie');
             this.form_data.append('movie_id', this.movies[0].id);
             let globalScope = this;

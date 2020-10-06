@@ -42,6 +42,7 @@ class MoviesNav extends Carousel {
         $('#board').hide();
         $('#movies-content').show();
 
+        this.form_data = new FormData();
         this.form_data.append('action', 'fetchTypeMovies');
         this.form_data.append('table', this.table);
         this.ajaxCall('../../php/data/movies.php', this.form_data, async function(response){
