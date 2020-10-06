@@ -17,7 +17,6 @@ class MoviesNav extends Carousel {
         $(document).on('click', '.card-item', function(){
             let movie = globalScope.urldecode($(this).find('input').attr('json_data'));
             movie = JSON.parse(movie);
-            console.log(movie);
             globalScope.showMovieInfo(movie);
         });
     }
