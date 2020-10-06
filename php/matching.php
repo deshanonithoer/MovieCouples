@@ -21,8 +21,27 @@ include("../layout/nav.php");
 <div class="container">
     <div class="row">
         <div id="board">
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card" no-card>Start!</div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal users -->
+<div class="modal" id="movie-modal-container" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Movie Info</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="movie-modal">
+            
+        </div>
+        <div class="modal-footer">
+
+        </div>
         </div>
     </div>
 </div>
