@@ -146,8 +146,26 @@ class Database {
             FROM `$table`
             JOIN `movies` ON `movies`.`uid` = `$table`.`movie_id`
             WHERE `user_id` = ?
+            GROUP BY `$table`.`movie_id`
             ORDER BY `$table`.`created_at` DESC
         ";
         return $this->dataCall($sql, array($user_id), true);
+    }
+
+    public function validateMovieDB($movie_id, $user_id){
+        $sql ="SELECT id
+            FROM `liked_movies`
+            WHERE `liked_movies`.`movie_id` = ?
+            AND `liked_movies`.`user_id` = ?
+
+            UNION
+
+            SELECT id
+            FROM `disliked_movies`
+            WHERE `disliked_movies`.`movie_id` = ?
+            AND `disliked_movies`.`user_id` = ?
+        ";
+        
+        return $this->dataCall($sql, array($movie_id, $user_id, $movie_id, $user_id), true);
     }
 }
