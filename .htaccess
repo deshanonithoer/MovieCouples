@@ -13,3 +13,6 @@ RedirectMatch 301 ^/profile.*$ /php/profile.php
 
 # Rewrite for users
 RedirectMatch 301 ^/users.*$ /php/users.php
+
+# Rewrite for Matching
+RedirectMatch 301 ^/matching.*$ /php/matching.php
