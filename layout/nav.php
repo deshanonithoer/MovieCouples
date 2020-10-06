@@ -15,7 +15,7 @@ if(array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         <div class="col-md-3 mr-auto">
             <a href="/">
                 <button type="button" class="btn btn-info">
-                    Home 
+                    <i class="fas fa-home"></i> 
                 </button>
             </a>
 
@@ -30,7 +30,7 @@ if(array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
             <?php if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']) { ?>
                 <a href="/users">
                     <button type="button" class="btn btn-info">
-                        Social 
+                        <i class="fas fa-users"></i> 
                     </button>
                 </a>
             <?php } ?>
@@ -42,12 +42,12 @@ if(array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
                 <span class="welkom-message">Welkom <?= ucwords($user->name) ?>!</span>
                 <a href="/profile">
                     <button type="button" class="btn btn-info">
-                        Profile
+                        <i class="far fa-user-circle"></i>
                     </button>
                 </a>
                 <a href="/loguit">
                     <button type="button" class="btn btn-info">
-                        Logout
+                        <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </a>
             </div>
