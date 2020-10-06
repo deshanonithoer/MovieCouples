@@ -28,14 +28,15 @@ class Matching extends User {
             $layout = '<div class="row no-gutters nopadding col-md-12">';
             $counter = 0;
             foreach($liked_movies as $key => $value){
-                $layout .= '<div class="col-md-4 card-item" style=\'background-image:url("http://image.tmdb.org/t/p/original/'. $value['poster_path'] .'"); \'>
+                $counter++;
+                $layout .= '<div class="col-md-3 card-item" style=\'background-image:url("http://image.tmdb.org/t/p/original/'. $value['poster_path'] .'"); \'>
                     <input type="hidden" json_data="'. urlencode(json_encode($value)) .'" />
                 </div>';
 
-                if(($counter + 1) % 3 == 0){
+                if($counter % 4 == 0){
                     $layout .= '
                         </div>
-                        <div class="row no-gutters col-md-12">
+                        <div class="row no-gutters nopadding col-md-12">
                     ';
                 }
             }

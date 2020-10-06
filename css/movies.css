@@ -54,7 +54,7 @@
 }
 
 .card-item {
-    height: 400px;
+    height: 300px;
     background-size: cover;
     background-position: center;
     transition: 0.2s ease;
@@ -63,6 +63,10 @@
 .card-item:hover {
     cursor: pointer;
     transform: scale(0.9);
+}
+
+.card:hover {
+    cursor: pointer;
 }
 
 .nopadding {
