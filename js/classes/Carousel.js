@@ -135,6 +135,8 @@ class Carousel {
             if (successful) {
                 // throw card in the chosen direction
                 this.topCard.style.transform = 'translateX(' + posX + 'px) translateY(' + posY + 'px) rotate(' + deg + 'deg)';
+                
+                this.handleSwipe(dirX);
 
                 // wait transition end
                 setTimeout(() => {
@@ -154,19 +156,80 @@ class Carousel {
     }
 
     push() {
-        let card = document.createElement('div');
-        card.classList.add('card');
-        card.style.backgroundImage = "url('https://picsum.photos/320/320/?random=" + Math.round(Math.random() * 1000000) + "')";
-        this.board.insertBefore(card, this.board.firstChild);
+        let globalScope = this;
+        if(this.movies && this.movies.length){
+            // Main element
+            let card = document.createElement('div');
+            card.classList.add('card');
+            card.style.backgroundImage = "url('http://image.tmdb.org/t/p/original/"+ this.movies[0].poster_path +"')";
+
+            // Info button
+            let infoButton = document.createElement('button');
+            infoButton.classList.add('movie-info-button');
+            infoButton.classList.add('btn-success');
+            infoButton.innerHTML = 'Info';
+            card.append(infoButton);
+            this.board.insertBefore(card, this.board.firstChild);
+
+            // On card click event
+            let old_movie = this.movies[0];
+            $(card).on('click', '.movie-info-button', function(){
+                globalScope.showMovieInfo(old_movie);
+            });
+
+            this.movies.shift();
+        } else {
+            this.get();
+        }
     }
 
     get () {
         let globalScope = this;
         $.get( this.apiUrl, function( data ) {
-            console.log(data);
+            if(data){
+                globalScope.movies = data.results;
+                globalScope.push();
+            }
         });
     }
 
+    showMovieInfo (movie) {
+        let element = '<div class="user-modal-content">' +
+            '<dl class="row">' +
+            '<dt class="col-sm-3">Name</dt>' +
+            '<dd class="col-sm-9">'+ movie.title +'</dd>' +
+
+            '<dt class="col-sm-3">Description</dt>' +
+            '<dd class="col-sm-9">'+ movie.overview +'</dd>' +
+
+            '<dt class="col-sm-3">Release date</dt>' +
+            '<dd class="col-sm-9"><p>'+ movie.release_date +'</p></dd>';
+
+        if(movie.poster_path){
+            element += '<dt class="col-sm-3">Profile image</dt>' +
+            '<dd class="col-sm-9"><p><img style="width: 100%;" class="friend-image" src="http://image.tmdb.org/t/p/original/'+ movie.poster_path +'" alt="user-image"/></p></dd>';
+        }
+
+        element += '</dl>' +
+            '</div>'
+        ;
+
+        $('#movie-modal').html(element);
+        $('#movie-modal-container').modal('show');
+    }
+
+    handleSwipe (direction) {
+        switch(direction){
+            case -1:
+                // LEFT
+                console.log('Left');
+                break;
+            case 1:
+                // RIGHT
+                console.log('Right');
+                break;
+        }
+    }
 }
 
 let board = document.querySelector('#board');
