@@ -20,7 +20,7 @@ if(array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
             </a>
 
             <?php if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']) { ?>
-                <a href="/matching">
+                <a href="/movies">
                     <button type="button" class="btn btn-info">
                         Movies 
                     </button>

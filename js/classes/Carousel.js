@@ -1,12 +1,7 @@
-class Carousel {
+class Carousel extends Form {
     constructor(element) {
+        super();
         this.board = element;
-        let pageNumber = Math.round(Math.random() * 10);
-        this.apiKey = "06454454e69fbc41ba407d51cd27c80c";
-        this.apiUrl = "https://api.themoviedb.org/4/list/"+ pageNumber +"?page=1&api_key=" + this.apiKey;
-
-        // handle gestures
-        this.handle();
     }
 
     handle() {
@@ -135,7 +130,6 @@ class Carousel {
             if (successful) {
                 // throw card in the chosen direction
                 this.topCard.style.transform = 'translateX(' + posX + 'px) translateY(' + posY + 'px) rotate(' + deg + 'deg)';
-                
                 this.handleSwipe(dirX);
 
                 // wait transition end
@@ -158,6 +152,7 @@ class Carousel {
     push() {
         let globalScope = this;
         if(this.movies && this.movies.length){
+
             // Main element
             let card = document.createElement('div');
             card.classList.add('card');
@@ -171,13 +166,20 @@ class Carousel {
             card.append(infoButton);
             this.board.insertBefore(card, this.board.firstChild);
 
-            // On card click event
-            let old_movie = this.movies[0];
-            $(card).on('click', '.movie-info-button', function(){
-                globalScope.showMovieInfo(old_movie);
-            });
+            // JSON data
+            let infoInput = document.createElement('input');
+            infoInput.setAttribute("json_data", JSON.stringify(this.movies[0]));
+            infoInput.setAttribute("type", "hidden");
+            card.append(infoInput);
 
-            this.movies.shift();
+            // On card click event
+            $(card).on('click', '.movie-info-button', function(){
+                globalScope.showMovieInfo(JSON.parse($(card).find('input').attr('json_data')));
+            });
+            
+            // handle gestures
+            globalScope.movies.shift();
+            this.handle();
         } else {
             this.get();
         }
@@ -185,6 +187,10 @@ class Carousel {
 
     get () {
         let globalScope = this;
+        let pageNumber = Math.floor(Math.random() * 100) + 1  ;
+        this.apiKey = "06454454e69fbc41ba407d51cd27c80c";
+        this.apiUrl = "https://api.themoviedb.org/4/list/"+ pageNumber +"?page=1&api_key=" + this.apiKey;
+        
         $.get( this.apiUrl, function( data ) {
             if(data){
                 globalScope.movies = data.results;
@@ -200,7 +206,7 @@ class Carousel {
             '<dd class="col-sm-9">'+ movie.title +'</dd>' +
 
             '<dt class="col-sm-3">Description</dt>' +
-            '<dd class="col-sm-9">'+ movie.overview +'</dd>' +
+            '<dd class="col-sm-9">'+ (movie.overview ?? movie.description) +'</dd>' +
 
             '<dt class="col-sm-3">Release date</dt>' +
             '<dd class="col-sm-9"><p>'+ movie.release_date +'</p></dd>';
@@ -219,20 +225,28 @@ class Carousel {
     }
 
     handleSwipe (direction) {
-        switch(direction){
-            case -1:
-                // LEFT
-                console.log('Left');
-                break;
-            case 1:
-                // RIGHT
-                console.log('Right');
-                break;
-        }
+        let globalScope = this;
+        let element = this.hammer.element;
+        let movie = JSON.parse($(element).find('input').attr('json_data'));
+
+        this.form_data.append('action', 'insertLoadedMovie');
+        this.form_data.append('type', direction);
+        $.each(movie, function(key, value){
+            globalScope.form_data.append(key, value);
+        });
+        
+        this.ajaxCall('../../php/data/movies.php', this.form_data, async function(response){
+            if(response){
+                // Successfully updated
+
+            }
+        });
     }
 }
 
 let board = document.querySelector('#board');
 
 let carousel = new Carousel(board);
-carousel.get();
+
+// carousel.get();
+// carousel.push();

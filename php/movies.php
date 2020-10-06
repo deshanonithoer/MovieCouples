@@ -18,10 +18,22 @@ include("../layout/nav.php");
 <link href="../css/movies.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 
-<div class="container">
+<div class="container movies-container">
     <div class="row">
-        <div id="board">
-            <div class="card" no-card>Start!</div>
+        <div class="col-md-3 text-center">
+            <button type="button" value="movieMatcher" class="btn movies-nav-button btn-info movie-button">
+                Movie matcher
+            </button>
+            <button type="button" value="fetchLikedMovies" class="btn movies-nav-button btn-success movie-button">
+                Liked movies
+            </button>
+            <button type="button" value="fetchDislikedMovies" class="btn movies-nav-button btn-danger movie-button">
+                Disliked movies
+            </button>
+        </div>
+        <div class="col-md-9 nopadding" id="movies-body">
+            <div id="board"></div>
+            <div id="movies-content"></div>
         </div>
     </div>
 </div>
@@ -46,4 +58,6 @@ include("../layout/nav.php");
     </div>
 </div>
 
+<script src="/js/classes/Form.js"></script>
 <script src="/js/classes/Carousel.js"></script>
+<script src="/js/classes/MoviesNav.js"></script>
