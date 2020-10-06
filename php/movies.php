@@ -22,7 +22,7 @@ include("../layout/nav.php");
     <div class="row">
         <div class="col-md-3 text-center">
             <button type="button" value="movieMatcher" class="btn movies-nav-button btn-info movie-button">
-                Movie matcher
+                Movies
             </button>
             <button type="button" value="fetchLikedMovies" class="btn movies-nav-button btn-success movie-button">
                 Liked movies
