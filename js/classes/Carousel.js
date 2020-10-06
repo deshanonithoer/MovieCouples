@@ -223,7 +223,7 @@ class Carousel extends Form {
             '<dd class="col-sm-9"><p>'+ movie.release_date +'</p></dd>';
 
         if(movie.poster_path){
-            element += '<dt class="col-sm-3">Profile image</dt>' +
+            element += '<dt class="col-sm-3">Movie poster</dt>' +
             '<dd class="col-sm-9"><p><img style="width: 40%;" class="friend-image" src="http://image.tmdb.org/t/p/original/'+ movie.poster_path +'" alt="user-image"/></p></dd>';
         }
 
