@@ -130,4 +130,24 @@ class Database {
         $sql = "UPDATE `friend-requests` SET `status` = 'accepted' WHERE id = ?";
         return $this->dataCall($sql, array($request_id), false);
     }
+
+    public function insertMovie($movieData){
+        $sql = "INSERT IGNORE INTO `movies` (`uid`, `release_date`, `title`, `description`, `poster_path`) VALUES (?, ?, ?, ?, ?)";
+        return $this->dataCall($sql, array($movieData['id'], $movieData['release_date'], $movieData['title'], $movieData['overview'], $movieData['poster_path']), false);
+    }
+
+    public function insertSelected ($tabel, $movie_id, $user_id){
+        $sql = "INSERT IGNORE INTO $tabel (`movie_id`, `user_id`) VALUES (?, ?)";
+        return $this->dataCall($sql, array($movie_id, $user_id), false);
+    }
+
+    public function fetchTypedMoviesDB($user_id, $table){
+        $sql = "SELECT *
+            FROM `$table`
+            JOIN `movies` ON `movies`.`uid` = `$table`.`movie_id`
+            WHERE `user_id` = ?
+            ORDER BY `$table`.`created_at` DESC
+        ";
+        return $this->dataCall($sql, array($user_id), true);
+    }
 }
