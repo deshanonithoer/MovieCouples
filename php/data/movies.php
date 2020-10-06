@@ -22,8 +22,8 @@ class Matching extends User {
         $insertSelected = $this->insertSelected($tabel, $_POST['id'], $_SESSION['uid']);
     }
 
-    public function fetchTypedMovies(){
-        $liked_movies = $this->fetchTypedMoviesDB($_SESSION['uid'], $_POST['table']);
+    public function fetchTypeMovies(){
+        $liked_movies = $this->fetchTypeMoviesDB($_SESSION['uid'], $_POST['table']);
         if(count($liked_movies)){
             $layout = '<div class="row no-gutters nopadding col-md-12">';
             $counter = 0;
