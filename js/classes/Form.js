@@ -34,6 +34,7 @@ class Form {
 
     submitForm (form) {
         let global_scope = this;
+        this.form_data = new FormData();
         $(form).find('input').each(function(){
             if($(this).attr('type') != 'file'){
                 let input = new Validate(this);
