@@ -141,7 +141,7 @@ class Database {
         return $this->dataCall($sql, array($movie_id, $user_id), false);
     }
 
-    public function fetchTypedMoviesDB($user_id, $table){
+    public function fetchTypeMoviesDB($user_id, $table){
         $sql = "SELECT *
             FROM `$table`
             JOIN `movies` ON `movies`.`uid` = `$table`.`movie_id`
