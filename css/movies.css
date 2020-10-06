@@ -72,3 +72,7 @@
 .nopadding {
     padding: 0;
 }
+
+#movie-modal-container .modal-dialog {
+    max-width: 1150px;
+}
